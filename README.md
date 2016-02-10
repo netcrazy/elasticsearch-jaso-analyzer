@@ -1,8 +1,8 @@
 # EJ Analyzer (elasticsearch-jaso-analyzer)
 
-## 자동완성용 한글 자소분석기입니다.
+## 자동완성용 한글 자소분석기입니다. elasticsearch 1.7.x 에서 테스트 되었습니다
 
-## 설치
+### 설치
 
 ```
 bin/plugin --url http://nonstop.pe.kr/elasticsearch/elasticsearch-jaso-analyzer-1.0.0.zip --install jaso-analyzer
@@ -45,30 +45,30 @@ curl -XPUT localhost:9200/jaso/ -d '{
 
 ```
 
-## 인덱스타임 분석기 테스트
+### 인덱스타임 분석기 테스트
 ```
 curl -XGET 'localhost:9200/jaso/_analyze?analyzer=jaso_search&pretty' -d '최일규 Hello'
 
 ```
 
-## 쿼리타임 분석기 테스트
+### 쿼리타임 분석기 테스트
 ```
 curl -XGET 'localhost:9200/jaso/_analyze?analyzer=jaso_index&pretty' -d '최일규 Hello'
 ```
 
 
-## 문서생성
+### 문서생성
 ```
 curl -XPOST http://localhost:9200/jaso/test/ -d '{
-"message":"최일규 Hello"
+    "message":"최일규 Hello"
 }'
 
 curl -XPOST http://localhost:9200/jaso/test/ -d '{
-"message":"초아"
+    "message":"초아"
 }'
 ```
 
-## 문서검색
+### 문서검색
 ```
 curl -XPOST 'http://localhost:9200/jaso/test/_search?pretty' -d '{
     "query" : {
