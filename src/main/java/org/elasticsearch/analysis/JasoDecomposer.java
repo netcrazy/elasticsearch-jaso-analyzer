@@ -3,7 +3,7 @@ package org.elasticsearch.analysis;
 import org.elasticsearch.common.config;
 
 /**
- * 자동완성용 자소분해
+ * 자동완성용 자소분해 (자소 Edge nGram형)
  * @author	최일규
  * @since	2013-09-15
  */

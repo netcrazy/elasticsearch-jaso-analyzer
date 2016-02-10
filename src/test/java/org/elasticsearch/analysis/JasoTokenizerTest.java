@@ -19,7 +19,7 @@ public class JasoTokenizerTest extends TestCase {
 		//String compare 	= "ㅊ/초/최/최ㅇ/쵱/최이/최일/최일ㄱ/최읽/최일규";
 		String compare 	= "ㅊㅗㅣㅇㅣㄹㄱㅠ";
 		
-		StringReader reader = new StringReader(orgion.toLowerCase());
+		StringReader reader = new StringReader(orgion);
 		JasoTokenizer tokenizer = new JasoTokenizer(reader);	
 		CharTermAttribute termAtt = tokenizer.addAttribute(CharTermAttribute.class);
 		

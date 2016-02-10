@@ -1,5 +1,10 @@
 package org.elasticsearch.analysis;
 
+/**
+ * 자동완성용 자소분해 (자소분해 with WhiteSpace)
+ * @author	최일규
+ * @since	2016-02-10
+ */
 public class JasoDecomposer2 {
 
 	//초성(19자) ㄱ ㄲ ㄴ ㄷ ㄸ ㄹ ㅁ ㅂ ㅃ ㅅ ㅆ ㅇ ㅈ ㅉ ㅊ ㅋ ㅌ ㅍ ㅎ
@@ -11,7 +16,7 @@ public class JasoDecomposer2 {
 
 	public String runJasoDecompose(String originStr) {
 		
-		char[] termBuffer 	= originStr.toLowerCase().toCharArray();
+		char[] termBuffer 	= originStr.toCharArray();
 		StringBuffer buffer = new StringBuffer();
 		int cho	 = 0;
 		int jung = 0;

@@ -33,7 +33,7 @@ public abstract class BaseTokenizer extends Tokenizer {
 	private static final int MAX_WORD_LEN 	= 2048;
 	private static final int IO_BUFFER_SIZE = 4096;
 
-	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);;
+	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 	private final OffsetAttribute offsetAtt = addAttribute(OffsetAttribute.class);
 
 	private final CharacterUtils charUtils;
