@@ -43,6 +43,20 @@ curl -XPUT localhost:9200/jaso/ -d '{
   }
 }'
 
+###### 인덱스 맵핑
+```
+curl -XPUT 'http://localhost:9200/jaso/_mapping/test' -d '{
+  "test": {
+    "properties": {
+      "name": {
+        "type": "string",
+        "store": true,
+        "index_analyzer": "jaso_index",
+        "search_analyzer": "jaso_search"
+      }
+    }
+  }
+}'
 ```
 
 ###### 인덱스타임 분석기 테스트
@@ -60,11 +74,11 @@ curl -XGET 'localhost:9200/jaso/_analyze?analyzer=jaso_index&pretty' -d '최일�
 ###### 문서생성
 ```
 curl -XPOST http://localhost:9200/jaso/test/ -d '{
-    "message":"최일규 Hello"
+    "name":"최일규 Hello"
 }'
 
 curl -XPOST http://localhost:9200/jaso/test/ -d '{
-    "message":"초아"
+    "name":"초아"
 }'
 ```
 
@@ -72,7 +86,7 @@ curl -XPOST http://localhost:9200/jaso/test/ -d '{
 ```
 curl -XPOST 'http://localhost:9200/jaso/test/_search?pretty' -d '{
     "query" : {
-        "match" : { "message" : "총" }
+        "match" : { "name" : "총" }
     }
 }'
 ```
