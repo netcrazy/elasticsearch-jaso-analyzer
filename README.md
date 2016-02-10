@@ -42,6 +42,7 @@ curl -XPUT localhost:9200/jaso/ -d '{
     }
   }
 }'
+```
 
 ###### 인덱스 맵핑
 ```
