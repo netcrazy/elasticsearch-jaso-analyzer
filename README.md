@@ -1,4 +1,4 @@
-# EJ Analyzer for elasticsearch 1.7.x
+# Korean Jaso Analyzer for elasticsearch 1.7.x
 
 ###### 자동완성용 한글 자소분석기입니다. elasticsearch 1.7.x 에서 테스트 되었습니다
 
