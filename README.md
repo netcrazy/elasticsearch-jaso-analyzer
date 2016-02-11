@@ -48,14 +48,12 @@ curl -XPUT localhost:9200/jaso/ -d '{
 ###### *인덱스 맵핑*
 ```
 curl -XPUT 'http://localhost:9200/jaso/_mapping/test' -d '{
-  "test": {
-    "properties": {
-      "name": {
-        "type": "string",
-        "store": true,
-        "index_analyzer": "jaso_index",
-        "search_analyzer": "jaso_search"
-      }
+  "properties": {
+    "name": {
+      "type": "string",
+      "store": true,
+      "index_analyzer": "jaso_index",
+      "search_analyzer": "jaso_search"
     }
   }
 }'
