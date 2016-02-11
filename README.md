@@ -8,7 +8,7 @@ bin/plugin --url http://nonstop.pe.kr/elasticsearch/elasticsearch-jaso-analyzer-
 ```
 
 
-###### *jaso Analyer 설정 및 인덱스 생성*
+###### *Korean Jaso Analyer 설정 및 인덱스 생성*
 ```
 curl -XPUT localhost:9200/jaso/ -d '{
   "settings": {
