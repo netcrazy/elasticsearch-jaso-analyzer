@@ -13,7 +13,7 @@ import java.io.Reader;
 /**
  * 자소 토크나이저 팩토리 구현
  * @author	최일규
- * @since	2013-09-15
+ * @since	2016-02-03
  */
 public class JasoTokenizerFactory extends AbstractTokenizerFactory {
 

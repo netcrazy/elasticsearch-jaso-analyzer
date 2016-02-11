@@ -14,20 +14,16 @@ import org.apache.lucene.analysis.util.CharacterUtils.CharacterBuffer;
 /**
  * Base 자소 토크나이저 구현
  * @author	최일규
- * @since	2013-09-15
+ * @since	2016-02-10
  */
 public abstract class BaseTokenizer extends Tokenizer {
 
 	protected BaseTokenizer(Reader input) {
 		super(input);
-		//decomposeMode=mode;
-		//typoMode=typo;
 		charUtils = CharacterUtils.getInstance();		
 	}
 
-	private static JasoDecomposer2 decomposer;
-	private int decomposeMode = 0;
-	private boolean typoMode = false;
+	private static JasoDecomposer decomposer;
 
 	private int offset = 0, bufferIndex = 0, dataLen = 0, finalOffset = 0;
 	private static final int MAX_WORD_LEN 	= 2048;
@@ -39,8 +35,6 @@ public abstract class BaseTokenizer extends Tokenizer {
 	private final CharacterUtils charUtils;
 	private final CharacterBuffer ioBuffer = CharacterUtils.newCharacterBuffer(IO_BUFFER_SIZE);
 
-
-
 	protected boolean isTokenChar(int c) {
 		throw new UnsupportedOperationException("Subclasses of CharTokenizer must implement isTokenChar(int)");
 	}
@@ -50,7 +44,7 @@ public abstract class BaseTokenizer extends Tokenizer {
 	}
 
 	/**
-	 * lucene 4.2x의 경우 데이터가 있으면 자소분리 후 true가 떨어지나, 여기서는 false로 떨어져 부득이하게 ioBuffer사이즈 상태로 조건변경 (CharacterUtils.fill)
+	 * lucene 4.2x의 경우 데이터가 있으면 자소분리 후 true가 떨어지나, 여기서는 false로 떨어져 ioBuffer사이즈 상태로 조건변경 (CharacterUtils.fill)
 	 * @author 	최일규
 	 * @since	2014-07-11
 	 */
@@ -65,7 +59,7 @@ public abstract class BaseTokenizer extends Tokenizer {
 			if (bufferIndex >= dataLen) {
 
 				offset += dataLen;
-				boolean isDecompose = charUtils.fill(ioBuffer, jasoDecompose(input, decomposeMode, typoMode));
+				boolean isDecompose = charUtils.fill(ioBuffer, jasoDecompose(input));
 
 				//버퍼사이즈가 있으면 분석한다. (return false일때까지... 재귀호출)
 				if(ioBuffer.getLength() == 0) {
@@ -122,18 +116,15 @@ public abstract class BaseTokenizer extends Tokenizer {
 		offsetAtt.setOffset(finalOffset, finalOffset);
 	}
 
-	/**
-	 * Reader -> String -> 자소변환 -> String -> Reader
-	 * @author 	ikchoi
-	 * @param 	in
-	 * @param 	mode
-	 * @param 	typo
-	 * @return
-	 */
-	public static Reader jasoDecompose(Reader in,int mode,boolean typo)
+    /**
+     * Reader -> String -> 자소변환 -> String -> Reader
+     * @param in
+     * @return
+     */
+	public static Reader jasoDecompose(Reader in)
 	{
 		Writer writer = new StringWriter();
-		decomposer=new JasoDecomposer2();
+		decomposer=new JasoDecomposer();
 		char[] buffer = new char[2048];
 		String temp="";
 

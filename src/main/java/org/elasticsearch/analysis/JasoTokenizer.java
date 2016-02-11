@@ -6,7 +6,7 @@ import org.elasticsearch.common.config;
 /**
  * 자소 토크나이저 구현
  * @author	최일규
- * @since	2013-09-15
+ * @since	2016-02-10
  */
 public final class JasoTokenizer extends BaseTokenizer {
 

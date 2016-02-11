@@ -1,7 +1,5 @@
 package org.elasticsearch.analysis;
 
-import org.elasticsearch.analysis.JasoDecomposer;
-
 import junit.framework.TestCase;
 
 /**
@@ -11,18 +9,10 @@ import junit.framework.TestCase;
  *
  */
 public class JasoTest extends TestCase {
-
-	public void testJasoDecomposer() {
-		System.out.println("-----------------------------");
-		JasoDecomposer aa=new JasoDecomposer();
-		String test=aa.runJasoDecompose("원할",0, false);
-		System.out.println(test);
-	}
 	
-	public void testJasoDecomposer2() {
-		System.out.println("-----------------------------");
-		JasoDecomposer2 aa=new JasoDecomposer2();
-		String test=aa.runJasoDecompose("원할");
+	public void testJasoDecomposer() {
+		JasoDecomposer aa=new JasoDecomposer();
+		String test=aa.runJasoDecompose("최일규 Hello");
 		System.out.println(test);
 	}	
 }
