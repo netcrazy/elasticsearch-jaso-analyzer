@@ -58,7 +58,7 @@ public class JasoTokenizerTest extends TestCase {
                 sb.append(termAtt.toString());
             }
 
-            //TestCase.assertEquals(vo.getCompare(), sb.toString());
+            TestCase.assertEquals(vo.getCompare(), sb.toString());
             tokenizer.close();
 
             System.out.println(String.format("%s => %s", vo.getOrigin(), sb.toString()));
