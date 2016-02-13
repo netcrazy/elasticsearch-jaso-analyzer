@@ -18,7 +18,10 @@ public class JasoTokenizerTest extends TestCase {
 	public void testTokenizer() throws IOException {
 
         TokenizerOptions options = TokenizerOptions.create("test");
+        //한영오타에 대한 토큰 추출여부 (hello -> ㅗㄷㅣㅣㅐ, 최일규 -> chldlfrb)
         options.setMistype(true);
+
+        //초성검색을 위한 토큰 추출여부 (최일규 -> ㅊㅇㄱ)
         options.setChosung(true);
 		
 		String[] origin	= {
@@ -51,13 +54,12 @@ public class JasoTokenizerTest extends TestCase {
                 , "hush/hush/hush/hush/ㅗㅕㄴㅗ/ㅗㅕㄴㅗ/ㅗㅕㄴㅗ/ㅗㅕㄴㅗ"
                 , "ㄹㅏㅂㅔㄹㅁㅗㅇㅡㅁㄱㅗㄱㄱㅓㅇㅜㄹㅈㅔㄱㅗㄱㅇㅓㄹㅣㅅㄱㅗㅏㅇㄷㅐㅇㅡㅣ/ㅇㅏㅊㅣㅁㄴㅗㄹㅐㅅㅓㅎㅕㄴ/fkqpfahdmarhrrjdnfwprhrdjfltrhkdeodml/dkclashfotjgus/ㄹㅂㅁㅇㄱㄱㅇㅈㄱㅇㄹㄱㄷㅇ/ㅇㅊㄴㄹㅅㅎ"
                 , "ㅗㄷㅣㅣㅐ"
-                , "ㅈㅈㅐㄱㅣㅇ"
-                , "째깅"
+                , "ㅈㅈㅐㄱㅣㅇ/World/ㅈㅈㄱ"
                 , "ㅣㅐㅎㅑㅅㄷㅊㅗ"
                 , "ㅍㅑㅅㅁㅡㅑㅜ"
-                , "ㄹㅐㅌ"
+                , "ㄹㅐㅌ/fox/ㄹ"
                 , "ㄹㅌ"
-                , "ㅅㄷㅣㄷㅍㅑㅐㅜ"
+                , "ㅅㄷㅣㄷㅍㅑㄴㅑㅐㅜ"
                 , "ㄱㄱㅊㅊㅁㄱ"
         };
 
@@ -65,7 +67,6 @@ public class JasoTokenizerTest extends TestCase {
 
             StringReader reader = new StringReader(origin[i]);
 
-            //한영오타에 대한 토큰을 추가할려면 true를 준다.
             JasoTokenizer tokenizer = new JasoTokenizer(reader, options);
             CharTermAttribute termAtt = tokenizer.addAttribute(CharTermAttribute.class);
 
@@ -78,7 +79,7 @@ public class JasoTokenizerTest extends TestCase {
                 sb.append(termAtt.toString());
             }
 
-            //TestCase.assertEquals(compare[i], sb.toString());
+            TestCase.assertEquals(compare[i], sb.toString());
             tokenizer.close();
 
             System.out.println(String.format("%s => %s", origin[i], sb.toString()));

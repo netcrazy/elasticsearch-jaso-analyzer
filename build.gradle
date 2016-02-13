@@ -4,7 +4,7 @@ apply plugin: 'eclipse'
 sourceCompatibility = 1.7
 compileJava.options.encoding = 'UTF-8'
 
-version = '1.0.0'
+version = '1.0.1'
 jar {
     manifest {
         attributes 'Implementation-Title': 'Elasticsearch Jaso Analyzer Plugin',
