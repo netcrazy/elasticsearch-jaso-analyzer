@@ -11,8 +11,13 @@ import junit.framework.TestCase;
 public class JasoTest extends TestCase {
 	
 	public void testJasoDecomposer() {
+
+        TokenizerOptions options = TokenizerOptions.create("test");
+        options.setMistype(true);
+        options.setChosung(true);
+
 		JasoDecomposer aa=new JasoDecomposer();
-		String test=aa.runJasoDecompose("최일규 Hello");
+		String test=aa.runJasoDecompose("최일규 Hello", options);
 		System.out.println(test);
 	}	
 }

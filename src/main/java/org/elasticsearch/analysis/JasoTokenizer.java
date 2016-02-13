@@ -10,8 +10,13 @@ import org.elasticsearch.common.config;
  */
 public final class JasoTokenizer extends BaseTokenizer {
 
-	protected JasoTokenizer(Reader input) {
-		super(input);
+    /**
+     * 자소 토크나이저 생성자
+     * @param input Reader
+     * @param options 토크나이저 옵션
+     */
+	protected JasoTokenizer(Reader input, TokenizerOptions options) {
+		super(input, options);
 	}
 
 	/** Collects only characters which do not satisfy
@@ -27,8 +32,7 @@ public final class JasoTokenizer extends BaseTokenizer {
      * @return
      */
 	protected boolean isSplit(int c) {
-		if ((char)c == config.WHITESPACE_CHAR)
-		{
+		if ((char)c == config.WHITESPACE_CHAR) {
 			return true;
 		} else {
 			return false;

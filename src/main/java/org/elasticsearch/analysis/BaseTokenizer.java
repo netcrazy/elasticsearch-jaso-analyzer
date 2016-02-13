@@ -5,6 +5,8 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+
+import com.sun.javafx.fxml.expression.Expression;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
@@ -18,8 +20,11 @@ import org.apache.lucene.analysis.util.CharacterUtils.CharacterBuffer;
  */
 public abstract class BaseTokenizer extends Tokenizer {
 
-	protected BaseTokenizer(Reader input) {
+    private TokenizerOptions options;
+
+	protected BaseTokenizer(Reader input, TokenizerOptions options) {
 		super(input);
+        this.options = options;
 		charUtils = CharacterUtils.getInstance();		
 	}
 
@@ -59,7 +64,7 @@ public abstract class BaseTokenizer extends Tokenizer {
 			if (bufferIndex >= dataLen) {
 
 				offset += dataLen;
-				boolean isDecompose = charUtils.fill(ioBuffer, jasoDecompose(input));
+				boolean isDecompose = charUtils.fill(ioBuffer, jasoDecompose(input, this.options));
 
 				//버퍼사이즈가 있으면 분석한다. (return false일때까지... 재귀호출)
 				if(ioBuffer.getLength() == 0) {
@@ -121,7 +126,7 @@ public abstract class BaseTokenizer extends Tokenizer {
      * @param in
      * @return
      */
-	public static Reader jasoDecompose(Reader in)
+	public static Reader jasoDecompose(Reader in, TokenizerOptions options)
 	{
 		Writer writer = new StringWriter();
 		decomposer=new JasoDecomposer();
@@ -134,7 +139,7 @@ public abstract class BaseTokenizer extends Tokenizer {
 				writer.write(buffer, 0, n);
 			}
 			temp=writer.toString();
-			temp=decomposer.runJasoDecompose(temp);
+			temp=decomposer.runJasoDecompose(temp, options);
 			// System.out.println(temp);
 			StringReader myStringReader = new StringReader(temp);
 			in=myStringReader;

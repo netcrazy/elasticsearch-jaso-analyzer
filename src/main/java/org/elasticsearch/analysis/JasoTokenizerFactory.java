@@ -17,6 +17,8 @@ import java.io.Reader;
  */
 public class JasoTokenizerFactory extends AbstractTokenizerFactory {
 
+    private TokenizerOptions options;
+
     @Inject
     public JasoTokenizerFactory(Index index, 
     		@IndexSettings Settings indexSettings, 
@@ -24,9 +26,13 @@ public class JasoTokenizerFactory extends AbstractTokenizerFactory {
     		@Assisted Settings settings) {
     	
         super(index, indexSettings, name, settings);
+
+        this.options = TokenizerOptions.create(name);
+        this.options.setMistype(settings.getAsBoolean("mistype", TokenizerOptions.MISTYPE));
+        this.options.setChosung(settings.getAsBoolean("chosung", TokenizerOptions.CHOSUNG));
     }
 
 	public Tokenizer create(Reader reader) {
-		return new JasoTokenizer(reader);
+		return new JasoTokenizer(reader, this.options);
 	}
 }
