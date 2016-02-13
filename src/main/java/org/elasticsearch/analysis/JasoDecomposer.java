@@ -30,6 +30,7 @@ public class JasoDecomposer {
         StringBuffer bufferTmp = new StringBuffer();
 
         boolean jaso = isJaso(originStr);
+        int strLen = originStr.length();
 
 		int cho;
 		int jung;
@@ -51,7 +52,9 @@ public class JasoDecomposer {
 
                 //한글에 대한 초성만 토큰처리 (일반적으로 색인시 분해함)
                 if(options.isChosung()) {
-                    bufferChosung.append(chosungKor[cho]);
+                    //초성은 2자이상일때 분해
+                    if(strLen >= 2)
+                        bufferChosung.append(chosungKor[cho]);
                 }
 
                 //한글문장에 대한 영문오타처리 (ㄱ -> r)

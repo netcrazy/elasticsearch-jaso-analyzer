@@ -39,8 +39,9 @@ public class JasoTokenizerTest extends TestCase {
         testCase.add(new TestCaseVO("째깅", "ㅈㅈㅐㄱㅣㅇ/World/ㅈㅈㄱ")); //World
         testCase.add(new TestCaseVO("ㅣㅐ햣ㄷ초", "ㅣㅐㅎㅑㅅㄷㅊㅗ")); //logitech
         testCase.add(new TestCaseVO("퍗므ㅑㅜ", "ㅍㅑㅅㅁㅡㅑㅜ")); //vitamin
-        testCase.add(new TestCaseVO("랱", "ㄹㅐㅌ/fox/ㄹ")); //fox
+        testCase.add(new TestCaseVO("랱", "ㄹㅐㅌ/fox")); //fox
         testCase.add(new TestCaseVO("ㅅ딛퍄냐ㅐㅜ", "ㅅㄷㅣㄷㅍㅑㄴㅑㅐㅜ")); //television
+        testCase.add(new TestCaseVO("최", "ㅊㅗㅣ/chl")); //television
 
         for(TestCaseVO vo : testCase) {
 
