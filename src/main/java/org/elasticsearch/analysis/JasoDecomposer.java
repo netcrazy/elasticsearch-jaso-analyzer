@@ -42,7 +42,7 @@ public class JasoDecomposer {
                 //Unicode 값으로 환산한다.
                 int uniValue = ch - 0xAC00;
 
-                jong = uniValue % 28;                    //종성
+                jong = uniValue % 28;                   //종성
                 cho  = ((uniValue - jong) / 28) / 21;   //초성
                 jung = ((uniValue - jong) / 28) % 21;   //중성
 

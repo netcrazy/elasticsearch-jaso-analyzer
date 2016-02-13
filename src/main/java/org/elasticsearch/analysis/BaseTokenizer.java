@@ -1,10 +1,6 @@
 package org.elasticsearch.analysis;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 
 import com.sun.javafx.fxml.expression.Expression;
 import org.apache.lucene.analysis.Tokenizer;
@@ -12,6 +8,8 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.util.CharacterUtils;
 import org.apache.lucene.analysis.util.CharacterUtils.CharacterBuffer;
+import org.elasticsearch.common.logging.ESLogger;
+import org.elasticsearch.common.logging.Loggers;
 
 /**
  * Base 자소 토크나이저 구현
@@ -21,11 +19,13 @@ import org.apache.lucene.analysis.util.CharacterUtils.CharacterBuffer;
 public abstract class BaseTokenizer extends Tokenizer {
 
     private TokenizerOptions options;
+	private static ESLogger logger;
 
 	protected BaseTokenizer(Reader input, TokenizerOptions options) {
 		super(input);
         this.options = options;
-		charUtils = CharacterUtils.getInstance();		
+		charUtils = CharacterUtils.getInstance();
+		logger = Loggers.getLogger(options.getName());
 	}
 
 	private static JasoDecomposer decomposer;
@@ -131,7 +131,7 @@ public abstract class BaseTokenizer extends Tokenizer {
 		Writer writer = new StringWriter();
 		decomposer=new JasoDecomposer();
 		char[] buffer = new char[2048];
-		String temp="";
+		String temp;
 
 		try {
 			int n;
@@ -143,8 +143,10 @@ public abstract class BaseTokenizer extends Tokenizer {
 			// System.out.println(temp);
 			StringReader myStringReader = new StringReader(temp);
 			in=myStringReader;
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			StringWriter errors = new StringWriter();
+			e.printStackTrace(new PrintWriter(errors));
+			logger.error(errors.toString());
 		} finally {}
 
 		return in;
