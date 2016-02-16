@@ -108,8 +108,8 @@ curl -XPUT 'http://localhost:9200/jaso/_mapping/test' -d '{
     "name": {
       "type": "string",
       "store": true,
-      "index_analyzer": "jaso_index",
-      "search_analyzer": "jaso_search"
+      "index_analyzer": "suggest_index_analyzer",
+      "search_analyzer": "suggest_search_analyzer"
     }
   }
 }'
