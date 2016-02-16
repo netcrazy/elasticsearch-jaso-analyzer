@@ -7,6 +7,15 @@
 bin/plugin --url http://nonstop.pe.kr/elasticsearch/elasticsearch-jaso-analyzer-1.0.1.zip --install jaso-analyzer
 ```
 
+###### *삭제 (필요시)*
+```
+bin/plugin --remove jaso-analyzer
+```
+
+###### *인덱스 삭제 (필요시)*
+```
+curl -XDELETE 'http://localhost:9200/jaso'
+```
 
 ###### *Korean Jaso Analyer 설정 및 인덱스 생성 (기본 자소검색용)*
 ```
@@ -15,26 +24,26 @@ curl -XPUT localhost:9200/jaso/ -d '{
     "index": {
       "analysis": {
         "filter": {
-          "autocomplete_filter": {
+          "suggest_filter": {
             "type": "edge_ngram",
             "min_gram": 1,
             "max_gram": 50
           }
         },
         "analyzer": {
-          "jaso_search": {
+          "suggest_search_analyzer": {
             "type": "custom",
             "tokenizer": "jaso_tokenizer",
             "filter": [
               "lowercase"
             ]
           },
-          "jaso_index": {
+          "suggest_index_analyzer": {
             "type": "custom",
             "tokenizer": "jaso_tokenizer",
             "filter": [
               "lowercase",
-              "autocomplete_filter"
+              "suggest_filter"
             ]
           }
         }
@@ -44,45 +53,45 @@ curl -XPUT localhost:9200/jaso/ -d '{
 }'
 ```
 
-###### *Korean Jaso Analyer 설정 및 인덱스 생성 (영,한오타 및 초성토큰 추출이 필요할 때..)*
+###### *Korean Jaso Analyer 설정 및 인덱스 생성 (한,영오타 및 초성토큰 추출이 필요할 때..)*
 ```
 curl -XPUT localhost:9200/jaso/ -d '{
   "settings": {
     "index": {
       "analysis": {
         "filter": {
-          "autocomplete_filter": {
+          "suggest_filter": {
             "type": "edge_ngram",
             "min_gram": 1,
             "max_gram": 50
           }
         },
         "tokenizer": {
-          "index_jaso_tokenizer": {
+          "jaso_index_tokenizer": {
             "type": "jaso_tokenizer",
             "mistype": true,
             "chosung": true
           },
-          "search_jaso_tokenizer": {
+          "jaso_search_tokenizer": {
             "type": "jaso_tokenizer",
             "mistype": true,
             "chosung": false
           }
         },
         "analyzer": {
-          "jaso_search": {
+          "suggest_search_analyzer": {
             "type": "custom",
-            "tokenizer": "search_jaso_tokenizer",
+            "tokenizer": "jaso_search_tokenizer",
             "filter": [
               "lowercase"
             ]
           },
-          "jaso_index": {
+          "suggest_index_analyzer": {
             "type": "custom",
-            "tokenizer": "index_jaso_tokenizer",
+            "tokenizer": "jaso_index_tokenizer",
             "filter": [
               "lowercase",
-              "autocomplete_filter"
+              "suggest_filter"
             ]
           }
         }
