@@ -21,24 +21,32 @@ public abstract class BaseTokenizer extends Tokenizer {
     private TokenizerOptions options;
 	private static ESLogger logger;
 
-	protected BaseTokenizer(Reader input, TokenizerOptions options) {
-		super(input);
-        this.options = options;
-		charUtils = CharacterUtils.getInstance();
-		logger = Loggers.getLogger(options.getName());
-	}
-
 	private static JasoDecomposer decomposer;
 
 	private int offset = 0, bufferIndex = 0, dataLen = 0, finalOffset = 0;
 	private static final int MAX_WORD_LEN 	= 2048;
 	private static final int IO_BUFFER_SIZE = 4096;
 
-	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
-	private final OffsetAttribute offsetAtt = addAttribute(OffsetAttribute.class);
+	private CharTermAttribute termAtt;
+	private OffsetAttribute offsetAtt;
 
 	private final CharacterUtils charUtils;
 	private final CharacterBuffer ioBuffer = CharacterUtils.newCharacterBuffer(IO_BUFFER_SIZE);
+
+	protected BaseTokenizer(Reader input, TokenizerOptions options) {
+		super(input);
+        this.options = options;
+		charUtils = CharacterUtils.getInstance();
+		logger = Loggers.getLogger(options.getName());
+
+		termAtt = addAttribute(CharTermAttribute.class);
+		offsetAtt = addAttribute(OffsetAttribute.class);
+
+		offset = 0;
+		bufferIndex = 0;
+		dataLen = 0;
+		finalOffset = 0;
+	}
 
 	protected boolean isTokenChar(int c) {
 		throw new UnsupportedOperationException("Subclasses of CharTokenizer must implement isTokenChar(int)");
@@ -121,11 +129,12 @@ public abstract class BaseTokenizer extends Tokenizer {
 		offsetAtt.setOffset(finalOffset, finalOffset);
 	}
 
-    /**
-     * Reader -> String -> 자소변환 -> String -> Reader
-     * @param in
-     * @return
-     */
+	/**
+	 * Reader -> String -> 자소변환 -> String -> Reader
+	 * @param in
+	 * @param options
+	 * @return
+	 */
 	public static Reader jasoDecompose(Reader in, TokenizerOptions options)
 	{
 		Writer writer = new StringWriter();
@@ -152,12 +161,8 @@ public abstract class BaseTokenizer extends Tokenizer {
 		return in;
 	}
 
-	/**
-	 * reset
-	 * @param input
-	 * @throws IOException
-	 */
-	public void reset(Reader input) throws IOException {
+	@Override
+	public void reset() throws IOException {
 		super.reset();
 		bufferIndex = 0;
 		offset = 0;

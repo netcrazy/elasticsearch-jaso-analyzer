@@ -4,6 +4,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import junit.framework.TestCase;
@@ -42,12 +43,13 @@ public class JasoTokenizerTest extends TestCase {
         testCase.add(new TestCaseVO("랱", "ㄹㅐㅌ/fox")); //fox
         testCase.add(new TestCaseVO("ㅅ딛퍄냐ㅐㅜ", "ㅅㄷㅣㄷㅍㅑㄴㅑㅐㅜ")); //television
         testCase.add(new TestCaseVO("최", "ㅊㅗㅣ/chl")); //television
+        testCase.add(new TestCaseVO("ㅅㄴㅅㄷ", "ㅅㄴㅅㄷ")); //소녀시대 초성검색
 
         for(TestCaseVO vo : testCase) {
 
             StringReader reader = new StringReader(vo.getOrigin());
 
-            JasoTokenizer tokenizer = new JasoTokenizer(reader, options);
+            Tokenizer tokenizer = new JasoTokenizer(reader, options);
             CharTermAttribute termAtt = tokenizer.addAttribute(CharTermAttribute.class);
 
             tokenizer.reset();
