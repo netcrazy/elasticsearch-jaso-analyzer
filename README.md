@@ -4,11 +4,11 @@
 
 ###### *설치*
 ```
-bin/plugin --url http://nonstop.pe.kr/elasticsearch/elasticsearch-jaso-analyzer-1.0.0.zip --install jaso-analyzer
+bin/plugin --url http://nonstop.pe.kr/elasticsearch/elasticsearch-jaso-analyzer-1.0.1.zip --install jaso-analyzer
 ```
 
 
-###### *Korean Jaso Analyer 설정 및 인덱스 생성*
+###### *Korean Jaso Analyer 설정 및 인덱스 생성 (기본 자소검색용)*
 ```
 curl -XPUT localhost:9200/jaso/ -d '{
   "settings": {
@@ -44,6 +44,53 @@ curl -XPUT localhost:9200/jaso/ -d '{
 }'
 ```
 
+###### *Korean Jaso Analyer 설정 및 인덱스 생성 (영,한오타 및 초성토큰 추출이 필요할 때..)*
+```
+curl -XPUT localhost:9200/jaso/ -d '{
+  "settings": {
+    "index": {
+      "analysis": {
+        "filter": {
+          "autocomplete_filter": {
+            "type": "edge_ngram",
+            "min_gram": 1,
+            "max_gram": 50
+          }
+        },
+        "tokenizer": {
+          "index_jaso_tokenizer": {
+            "type": "jaso_tokenizer",
+            "mistype": true,
+            "chosung": true
+          },
+          "search_jaso_tokenizer": {
+            "type": "jaso_tokenizer",
+            "mistype": true,
+            "chosung": false
+          }
+        },
+        "analyzer": {
+          "jaso_search": {
+            "type": "custom",
+            "tokenizer": "search_jaso_tokenizer",
+            "filter": [
+              "lowercase"
+            ]
+          },
+          "jaso_index": {
+            "type": "custom",
+            "tokenizer": "index_jaso_tokenizer",
+            "filter": [
+              "lowercase",
+              "autocomplete_filter"
+            ]
+          }
+        }
+      }
+    }
+  }
+}'
+```
 
 ###### *인덱스 맵핑*
 ```
