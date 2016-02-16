@@ -110,7 +110,7 @@ public class JasoDecomposer {
 			}
 
             //추가적인 예외상황으로 추가 토큰처리 (ㅗㄷㅣㅣㅐ 검색시)
-            if(options.isChosung() && jaso) {
+            if(jaso) {
                 if(ch >= 0xAC00 && ch <= 0xD7A3) {
 
                     //Unicode 값으로 환산한다.
