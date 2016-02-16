@@ -67,15 +67,15 @@ curl -XPUT localhost:9200/jaso/ -d '{
           }
         },
         "tokenizer": {
-          "jaso_index_tokenizer": {
-            "type": "jaso_tokenizer",
-            "mistype": true,
-            "chosung": true
-          },
           "jaso_search_tokenizer": {
             "type": "jaso_tokenizer",
             "mistype": true,
             "chosung": false
+          },
+          "jaso_index_tokenizer": {
+            "type": "jaso_tokenizer",
+            "mistype": true,
+            "chosung": true
           }
         },
         "analyzer": {
