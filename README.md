@@ -144,7 +144,13 @@ curl -XPOST http://localhost:9200/jaso/test/ -d '{
 ```
 curl -XPOST 'http://localhost:9200/jaso/test/_search?pretty' -d '{
     "query" : {
-        "match" : { "name" : "총" }
+        "match" : { "name" : "초" }
+    }
+}'
+
+curl -XPOST 'http://localhost:9200/jaso/test/_search?pretty' -d '{
+    "query" : {
+        "match" : { "name" : "ㅊㅇㄱ" }
     }
 }'
 ```
