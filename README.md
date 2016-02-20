@@ -4,7 +4,7 @@
 
 ###### *설치*
 ```
-bin/plugin --url http://nonstop.pe.kr/elasticsearch/elasticsearch-jaso-analyzer-1.0.1.zip --install jaso-analyzer
+bin/plugin --url http://nonstop.pe.kr/elasticsearch/elasticsearch-jaso-analyzer-1.0.2.zip --install jaso-analyzer
 ```
 
 ###### *삭제 (필요시)*

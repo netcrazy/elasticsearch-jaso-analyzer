@@ -24,10 +24,10 @@ public class JasoTokenizerTest extends TestCase {
         TokenizerOptions options = TokenizerOptions.create("test");
 
         //한영오타에 대한 토큰 추출여부 (hello -> ㅗㄷㅣㅣㅐ, 최일규 -> chldlfrb)
-        options.setMistype(false);
+        options.setMistype(true);
 
         //초성검색을 위한 토큰 추출여부 (최일규 -> ㅊㅇㄱ)
-        options.setChosung(false);
+        options.setChosung(true);
 
         List<TestCaseVO> testCase = new ArrayList<TestCaseVO>();
 
