@@ -110,14 +110,14 @@ curl -XPUT 'http://localhost:9200/jaso/_mapping/test' -d '{
 
 ###### *인덱스타임 분석기 테스트*
 ```
-curl -XGET 'localhost:9200/jaso/_analyze?analyzer=jaso_index&pretty' -d '최일규 Hello'
+curl -XGET 'localhost:9200/jaso/_analyze?analyzer=suggest_index_analyzer&pretty' -d '최일규 Hello'
 
 ```
 
 
 ###### *쿼리타임 분석기 테스트*
 ```
-curl -XGET 'localhost:9200/jaso/_analyze?analyzer=jaso_search&pretty' -d '최일규 Hello'
+curl -XGET 'localhost:9200/jaso/_analyze?analyzer=suggest_search_analyzer&pretty' -d '최일규 Hello'
 ```
 
 
