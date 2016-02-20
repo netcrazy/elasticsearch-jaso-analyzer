@@ -20,6 +20,7 @@ public class JasoTokenizerTest extends TestCase {
 	
 	public void testTokenizer() throws IOException {
 
+        long start = System.currentTimeMillis();
         TokenizerOptions options = TokenizerOptions.create("test");
 
         //한영오타에 대한 토큰 추출여부 (hello -> ㅗㄷㅣㅣㅐ, 최일규 -> chldlfrb)
@@ -148,6 +149,9 @@ public class JasoTokenizerTest extends TestCase {
             tokenizer.close();
 
             System.out.println(String.format("%s => %s", vo.getOrigin(), sb.toString()));
+
+            long end = System.currentTimeMillis();
+            System.out.println("실행 시간 : " + (end - start) / 1000.0);
         }
 	}	
 }
