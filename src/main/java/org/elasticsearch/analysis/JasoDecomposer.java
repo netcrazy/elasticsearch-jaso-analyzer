@@ -3,7 +3,7 @@ package org.elasticsearch.analysis;
 /**
  * 자동완성용 자소분해 (자소분해 with WhiteSpace)
  * @author  최일규
- * @since   2016 -02 -10
+ * @since   2016-02-10
  */
 public class JasoDecomposer {
 
@@ -68,9 +68,9 @@ public class JasoDecomposer {
                     //한글초성
                     korBuffer.append(chosungKor[cho]);
 
-                    //한글에 대한 초성만 토큰처리 (일반적으로 색인시 분해함)
+                    //한글에 대한 초성처리 (일반적으로 색인시 초성을 담는다.)
                     if(options.isChosung() && firstCharType) {
-                        //초성은 2자이상일때 분해
+                        //초성은 2자이상일때 포함
                         if(strLen >= 2)
                             chosungBuffer.append(chosungKor[cho]);
                     }
@@ -134,11 +134,10 @@ public class JasoDecomposer {
                     }
                 }
 
-                //추가적인 예외상황으로 추가 토큰처리 (ㅗㄷㅣㅣㅐ 검색시)
+                //추가적인 예외상황으로 추가 토큰처리 (ㅗ디ㅣㅐ -> ㅗㄷㅣㅣㅐ 자소분해)
                 if(jaso) {
 
                     if(ch >= 0xAC00 && ch <= 0xD7A3) {
-
                         //Unicode 값으로 환산한다.
                         int uniValue = ch - 0xAC00;
 
@@ -217,7 +216,7 @@ public class JasoDecomposer {
     }
 
     /**
-     * 문자열에 영문 여부
+     * 문자열에 영문포함 여부
      * @param str
      * @return
      */
