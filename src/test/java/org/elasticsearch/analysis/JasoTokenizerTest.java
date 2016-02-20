@@ -24,10 +24,10 @@ public class JasoTokenizerTest extends TestCase {
         TokenizerOptions options = TokenizerOptions.create("test");
 
         //한영오타에 대한 토큰 추출여부 (hello -> ㅗㄷㅣㅣㅐ, 최일규 -> chldlfrb)
-        options.setMistype(true);
+        options.setMistype(false);
 
         //초성검색을 위한 토큰 추출여부 (최일규 -> ㅊㅇㄱ)
-        options.setChosung(true);
+        options.setChosung(false);
 
         List<TestCaseVO> testCase = new ArrayList<TestCaseVO>();
 
@@ -149,9 +149,9 @@ public class JasoTokenizerTest extends TestCase {
             tokenizer.close();
 
             System.out.println(String.format("%s => %s", vo.getOrigin(), sb.toString()));
-
-            long end = System.currentTimeMillis();
-            System.out.println("실행 시간 : " + (end - start) / 1000.0);
         }
+
+        long end = System.currentTimeMillis();
+        System.out.println("실행 시간 : " + (end - start) / 1000.0);
 	}	
 }
