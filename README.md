@@ -33,16 +33,12 @@ curl -XPUT localhost:9200/jaso/ -d '{
         "analyzer": {
           "suggest_search_analyzer": {
             "type": "custom",
-            "tokenizer": "jaso_tokenizer",
-            "filter": [
-              "lowercase"
-            ]
+            "tokenizer": "jaso_tokenizer"
           },
           "suggest_index_analyzer": {
             "type": "custom",
             "tokenizer": "jaso_tokenizer",
             "filter": [
-              "lowercase",
               "suggest_filter"
             ]
           }
@@ -81,16 +77,12 @@ curl -XPUT localhost:9200/jaso/ -d '{
         "analyzer": {
           "suggest_search_analyzer": {
             "type": "custom",
-            "tokenizer": "jaso_search_tokenizer",
-            "filter": [
-              "lowercase"
-            ]
+            "tokenizer": "jaso_search_tokenizer"
           },
           "suggest_index_analyzer": {
             "type": "custom",
             "tokenizer": "jaso_index_tokenizer",
             "filter": [
-              "lowercase",
               "suggest_filter"
             ]
           }
