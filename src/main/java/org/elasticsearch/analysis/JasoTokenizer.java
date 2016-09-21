@@ -1,6 +1,5 @@
 package org.elasticsearch.analysis;
 
-import java.io.Reader;
 import org.elasticsearch.common.config;
 
 /**
@@ -12,11 +11,10 @@ public final class JasoTokenizer extends BaseTokenizer {
 
     /**
      * 자소 토크나이저 생성자
-     * @param input Reader
      * @param options 토크나이저 옵션
      */
-	protected JasoTokenizer(Reader input, TokenizerOptions options) {
-		super(input, options);
+	protected JasoTokenizer(TokenizerOptions options) {
+		super(options);
 	}
 
 	/** Collects only characters which do not satisfy

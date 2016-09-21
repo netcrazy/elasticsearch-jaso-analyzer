@@ -1,8 +1,5 @@
 package org.elasticsearch.analysis;
 
-import java.io.*;
-
-import com.sun.javafx.fxml.expression.Expression;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
@@ -10,6 +7,8 @@ import org.apache.lucene.analysis.util.CharacterUtils;
 import org.apache.lucene.analysis.util.CharacterUtils.CharacterBuffer;
 import org.elasticsearch.common.logging.ESLogger;
 import org.elasticsearch.common.logging.Loggers;
+
+import java.io.*;
 
 /**
  * Base 자소 토크나이저 구현
@@ -33,8 +32,7 @@ public abstract class BaseTokenizer extends Tokenizer {
 	private final CharacterUtils charUtils;
 	private final CharacterBuffer ioBuffer = CharacterUtils.newCharacterBuffer(IO_BUFFER_SIZE);
 
-	protected BaseTokenizer(Reader input, TokenizerOptions options) {
-		super(input);
+	protected BaseTokenizer(TokenizerOptions options) {
         this.options = options;
 		charUtils = CharacterUtils.getInstance();
 		logger = Loggers.getLogger(options.getName());
