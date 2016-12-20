@@ -1,6 +1,24 @@
-# Korean Jaso Analyzer for elasticsearch 1.7.x
+# Korean Jaso Analyzer for elasticsearch 2.3.x
 
-###### 자동완성용 한글 자소분석기입니다. elasticsearch 1.7.x 에서 테스트 되었습니다
+## ES Plugin change
+
+>* AbstractPlugin => Plugin
+>* [plugin-descriptor.properties]
+(https://www.elastic.co/guide/en/elasticsearch/plugins/current/plugin-authors.html#plugin-authors) 프로퍼타 파일 형식 변경
+
+*[https://github.com/imotov/elasticsearch-native-script-example](https://github.com/imotov/elasticsearch-native-script-example)
+ 
+## changed
+
+* ES 1.7x -> 2.3
+
+## install
+
+~~~shell
+$ gradle build buildPluginZip
+~~~
+
+###### 자동완성용 한글 자소분석기입니다. elasticsearch 2.3.x 에서 테스트 되었습니다
 
 ###### *설치*
 ```

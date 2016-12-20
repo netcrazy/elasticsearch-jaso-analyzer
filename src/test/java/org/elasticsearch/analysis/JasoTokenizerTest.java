@@ -1,14 +1,12 @@
 package org.elasticsearch.analysis;
+import junit.framework.TestCase;
+import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.lucene.analysis.Tokenizer;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-
-import junit.framework.TestCase;
-import org.elasticsearch.common.config;
 
 /**
  * 토크나이저 유닛테스트
@@ -133,7 +131,8 @@ public class JasoTokenizerTest extends TestCase {
 
             StringReader reader = new StringReader(vo.getOrigin());
 
-            Tokenizer tokenizer = new JasoTokenizer(reader, options);
+            Tokenizer tokenizer = new JasoTokenizer( options);
+            tokenizer.setReader(reader);
             CharTermAttribute termAtt = tokenizer.addAttribute(CharTermAttribute.class);
 
             tokenizer.reset();
