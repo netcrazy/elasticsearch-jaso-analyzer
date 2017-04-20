@@ -10,7 +10,7 @@
  
 ## changed
 
-* ES 1.7x -> 2.3
+* ES 1.7x -> 2.3.1
 
 ## install
 
@@ -18,7 +18,7 @@
 $ gradle build buildPluginZip
 ~~~
 
-###### 자동완성용 한글 자소분석기입니다. elasticsearch 2.3.x 에서 테스트 되었습니다
+###### 자동완성용 한글 자소분석기입니다. elasticsearch 2.3.1 에서 테스트 되었습니다
 
 ###### *설치*
 ```
