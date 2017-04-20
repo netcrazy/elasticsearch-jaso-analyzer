@@ -27,7 +27,7 @@ sudo ./bin/plugin install http://nonstop.pe.kr/elasticsearch/jaso-analyzer-plugi
 
 ###### *삭제 (필요시)*
 ```
-bin/plugin --remove jaso-analyzer
+sudo bin/plugin remove jaso-analyzer
 ```
 
 ###### *인덱스 삭제 (필요시)*
