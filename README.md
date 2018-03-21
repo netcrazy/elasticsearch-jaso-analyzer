@@ -22,7 +22,7 @@ $ gradle build buildPluginZip
 
 ###### *설치*
 ```
-sudo ./bin/plugin install http://nonstop.pe.kr/elasticsearch/jaso-analyzer-plugin-1.0.2-plugin.zip
+sudo ./bin/plugin install https://github.com/netcrazy/elasticsearch-jaso-analyzer/releases/download/1.0.2/jaso-analyzer-plugin-1.0.2-plugin.zip
 ```
 
 ###### *삭제 (필요시)*
