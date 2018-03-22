@@ -5,7 +5,7 @@ import org.elasticsearch.common.config;
 /**
  * 자소 토크나이저 구현
  * @author	최일규
- * @since	2016-02-10
+ * @since	2018-03-21
  */
 public final class JasoTokenizer extends BaseTokenizer {
 
@@ -13,7 +13,7 @@ public final class JasoTokenizer extends BaseTokenizer {
      * 자소 토크나이저 생성자
      * @param options 토크나이저 옵션
      */
-	protected JasoTokenizer(TokenizerOptions options) {
+	public JasoTokenizer(TokenizerOptions options) {
 		super(options);
 	}
 

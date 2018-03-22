@@ -1,13 +1,12 @@
 package org.elasticsearch.analysis;
 
+import org.apache.logging.log4j.Logger;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
-import org.apache.lucene.analysis.util.CharacterUtils;
-import org.apache.lucene.analysis.util.CharacterUtils.CharacterBuffer;
-import org.elasticsearch.common.logging.ESLogger;
-import org.elasticsearch.common.logging.Loggers;
-
+import org.apache.lucene.analysis.CharacterUtils;
+import org.apache.lucene.analysis.CharacterUtils.CharacterBuffer;
+import org.elasticsearch.common.logging.*;
 import java.io.*;
 
 /**
@@ -18,7 +17,7 @@ import java.io.*;
 public abstract class BaseTokenizer extends Tokenizer {
 
     private TokenizerOptions options;
-	private static ESLogger logger;
+	private static final Logger logger = ESLoggerFactory.getLogger(BaseTokenizer.class.getName());
 
 	private static JasoDecomposer decomposer;
 
@@ -29,13 +28,11 @@ public abstract class BaseTokenizer extends Tokenizer {
 	private CharTermAttribute termAtt;
 	private OffsetAttribute offsetAtt;
 
-	private final CharacterUtils charUtils;
+	private static final CharacterUtils charUtils = null;
 	private final CharacterBuffer ioBuffer = CharacterUtils.newCharacterBuffer(IO_BUFFER_SIZE);
 
 	protected BaseTokenizer(TokenizerOptions options) {
         this.options = options;
-		charUtils = CharacterUtils.getInstance();
-		logger = Loggers.getLogger(options.getName());
 
 		termAtt = addAttribute(CharTermAttribute.class);
 		offsetAtt = addAttribute(OffsetAttribute.class);
@@ -86,7 +83,7 @@ public abstract class BaseTokenizer extends Tokenizer {
 				bufferIndex = 0;
 			}
 			// use CharacterUtils here to support < 3.1 UTF-16 code unit behavior if the char based methods are gone
-			final int c = charUtils.codePointAt(ioBuffer.getBuffer(), bufferIndex, dataLen);
+			final int c = Character.codePointAt(ioBuffer.getBuffer(), bufferIndex, dataLen);
 			bufferIndex += Character.charCount(c);
 
 			// if it's a token char
