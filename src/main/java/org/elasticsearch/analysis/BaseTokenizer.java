@@ -17,7 +17,7 @@ import java.io.*;
 public abstract class BaseTokenizer extends Tokenizer {
 
     private TokenizerOptions options;
-	private static final Logger logger = ESLoggerFactory.getLogger(BaseTokenizer.class.getName());
+	private static Logger logger = null;
 
 	private static JasoDecomposer decomposer;
 
@@ -34,6 +34,7 @@ public abstract class BaseTokenizer extends Tokenizer {
 	protected BaseTokenizer(TokenizerOptions options) {
         this.options = options;
 
+		logger = ESLoggerFactory.getLogger(options.getName());
 		termAtt = addAttribute(CharTermAttribute.class);
 		offsetAtt = addAttribute(OffsetAttribute.class);
 
