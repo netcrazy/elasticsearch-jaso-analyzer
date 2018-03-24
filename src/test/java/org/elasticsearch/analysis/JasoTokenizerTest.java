@@ -1,4 +1,5 @@
 package org.elasticsearch.analysis;
+
 import junit.framework.TestCase;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
@@ -10,16 +11,16 @@ import java.util.List;
 
 /**
  * 토크나이저 유닛테스트
+ *
  * @author 최일규
  * @since 2016-02-11
- *
  */
 public class JasoTokenizerTest extends TestCase {
-	
-	public void testTokenizer() throws IOException {
+
+    public void testTokenizer() throws IOException {
 
         long start = System.currentTimeMillis();
-        TokenizerOptions options = TokenizerOptions.create("test");
+        TokenizerOptions options = TokenizerOptions.create("testTokenizer");
 
         //한영오타에 대한 토큰 추출여부 (hello -> ㅗㄷㅣㅣㅐ, 최일규 -> chldlfrb)
         options.setMistype(true);
@@ -29,7 +30,7 @@ public class JasoTokenizerTest extends TestCase {
 
         List<TestCaseVO> testCase = new ArrayList<TestCaseVO>();
 
-        if(options.isMistype() == true && options.isChosung() == true) {
+        if (options.isMistype() == true && options.isChosung() == true) {
 
             testCase.add(new TestCaseVO("최일규", "ㅊㅗㅣㅇㅣㄹㄱㅠ/chldlfrb/ㅊㅇㄱ"));
             testCase.add(new TestCaseVO("소녀시대", "ㅅㅗㄴㅕㅅㅣㄷㅐ/thsutleo/ㅅㄴㅅㄷ"));
@@ -53,7 +54,7 @@ public class JasoTokenizerTest extends TestCase {
             testCase.add(new TestCaseVO("최신가요 1990", "ㅊㅗㅣㅅㅣㄴㄱㅏㅇㅛ1990/chltlsrkdy1990/ㅊㅅㄱㅇ"));
             testCase.add(new TestCaseVO("최신가요&", "ㅊㅗㅣㅅㅣㄴㄱㅏㅇㅛ&/chltlsrkdy&/ㅊㅅㄱㅇ"));
 
-        } else if(options.isMistype() == true && options.isChosung() == false) {
+        } else if (options.isMistype() == true && options.isChosung() == false) {
 
             testCase.add(new TestCaseVO("최일규", "ㅊㅗㅣㅇㅣㄹㄱㅠ/chldlfrb"));
             testCase.add(new TestCaseVO("소녀시대", "ㅅㅗㄴㅕㅅㅣㄷㅐ/thsutleo"));
@@ -77,7 +78,7 @@ public class JasoTokenizerTest extends TestCase {
             testCase.add(new TestCaseVO("최신가요 1990", "ㅊㅗㅣㅅㅣㄴㄱㅏㅇㅛ1990/chltlsrkdy1990"));
             testCase.add(new TestCaseVO("최신가요&", "ㅊㅗㅣㅅㅣㄴㄱㅏㅇㅛ&/chltlsrkdy&"));
 
-        } else if(options.isMistype() == false && options.isChosung() == true) {
+        } else if (options.isMistype() == false && options.isChosung() == true) {
 
             testCase.add(new TestCaseVO("최일규", "ㅊㅗㅣㅇㅣㄹㄱㅠ/ㅊㅇㄱ"));
             testCase.add(new TestCaseVO("소녀시대", "ㅅㅗㄴㅕㅅㅣㄷㅐ/ㅅㄴㅅㄷ"));
@@ -101,7 +102,7 @@ public class JasoTokenizerTest extends TestCase {
             testCase.add(new TestCaseVO("최신가요 1990", "ㅊㅗㅣㅅㅣㄴㄱㅏㅇㅛ1990/ㅊㅅㄱㅇ"));
             testCase.add(new TestCaseVO("최신가요&", "ㅊㅗㅣㅅㅣㄴㄱㅏㅇㅛ&/ㅊㅅㄱㅇ"));
 
-        } else if(options.isMistype() == false && options.isChosung() == false) {
+        } else if (options.isMistype() == false && options.isChosung() == false) {
 
             testCase.add(new TestCaseVO("최일규", "ㅊㅗㅣㅇㅣㄹㄱㅠ"));
             testCase.add(new TestCaseVO("소녀시대", "ㅅㅗㄴㅕㅅㅣㄷㅐ"));
@@ -127,11 +128,11 @@ public class JasoTokenizerTest extends TestCase {
 
         }
 
-        for(TestCaseVO vo : testCase) {
+        for (TestCaseVO vo : testCase) {
 
             StringReader reader = new StringReader(vo.getOrigin());
 
-            Tokenizer tokenizer = new JasoTokenizer( options);
+            Tokenizer tokenizer = new JasoTokenizer(options);
             tokenizer.setReader(reader);
             CharTermAttribute termAtt = tokenizer.addAttribute(CharTermAttribute.class);
 
@@ -152,5 +153,5 @@ public class JasoTokenizerTest extends TestCase {
 
         long end = System.currentTimeMillis();
         System.out.println("실행 시간 : " + (end - start) / 1000.0);
-	}	
+    }
 }

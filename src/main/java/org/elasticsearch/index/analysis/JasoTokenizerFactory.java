@@ -9,12 +9,14 @@ import org.elasticsearch.env.Environment;
 
 /**
  * JasoTokenizerFactory
- * @author	최일규
- * @since	2018-03-21
+ *
+ * @author 최일규
+ * @since 2018-03-21
  */
 public class JasoTokenizerFactory extends AbstractTokenizerFactory {
 
     private TokenizerOptions options;
+
     public JasoTokenizerFactory(IndexSettings indexSettings,
                                 Environment environment,
                                 String name,
@@ -29,6 +31,6 @@ public class JasoTokenizerFactory extends AbstractTokenizerFactory {
 
     @Override
     public Tokenizer create() {
-         return new JasoTokenizer(this.options);
+        return new JasoTokenizer(this.options);
     }
 }

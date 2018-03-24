@@ -7,8 +7,9 @@ import org.elasticsearch.index.IndexSettings;
 
 /**
  * JasoAnalyzerProvider
- * @author	최일규
- * @since	2018-03-21
+ *
+ * @author 최일규
+ * @since 2018-03-21
  */
 public class JasoAnalyzerProvider extends AbstractIndexAnalyzerProvider<JasoAnalyzer> {
     private final JasoAnalyzer analyzer;

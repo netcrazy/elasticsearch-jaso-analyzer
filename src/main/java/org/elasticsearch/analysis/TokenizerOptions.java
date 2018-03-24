@@ -2,9 +2,9 @@ package org.elasticsearch.analysis;
 
 /**
  * 토크나이저 옵션
- * @author 최일규
- * @since  2016-02-12
  *
+ * @author 최일규
+ * @since 2016-02-12
  */
 public class TokenizerOptions {
 
@@ -36,7 +36,7 @@ public class TokenizerOptions {
     }
 
     public void setMistype(boolean mistype) {
-        this. mistype = mistype;
+        this.mistype = mistype;
     }
 
     public boolean isChosung() {
@@ -44,6 +44,6 @@ public class TokenizerOptions {
     }
 
     public void setChosung(boolean chosung) {
-        this. chosung = chosung;
+        this.chosung = chosung;
     }
 }

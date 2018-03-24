@@ -2,9 +2,9 @@ package org.elasticsearch.analysis;
 
 /**
  * 테스트케이스 VO
+ *
  * @author 최일규
  * @since 2016-02-13
- *
  */
 public class TestCaseVO {
 
