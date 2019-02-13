@@ -1,15 +1,4 @@
-# Korean Jaso Analyzer for Elasticsearch 6.x
-
-## ES Plugin change
-
->* AbstractPlugin => Plugin
->* [plugin-descriptor.properties]
-(https://www.elastic.co/guide/en/elasticsearch/plugins/current/plugin-authors.html#plugin-authors) 프로퍼타 파일 형식 변경
-
- 
-## changed
-
-* ES 2.3.1 -> 6.2.3
+# Korean Jaso Analyzer for Elasticsearch 6.6.0
 
 ## install
 
@@ -17,16 +6,16 @@
 $ gradle build buildPluginZip
 ~~~
 
-###### 자동완성용 한글 자소분석기입니다. elasticsearch 6.2.3 에서 테스트 되었습니다
+###### 자동완성용 한글 자소분석기입니다. elasticsearch 6.6.0 에서 테스트 되었습니다
 
 ###### *설치*
 ```
-sudo bin/elasticsearch-plugin install https://github.com/netcrazy/elasticsearch-jaso-analyzer/releases/download/v6.2.3/jaso-analyzer-plugin-6.2.3.0-plugin.zip
+bin/elasticsearch-plugin install https://github.com/netcrazy/elasticsearch-jaso-analyzer/releases/download/v6.6.0/jaso-analyzer-plugin-6.6.0.0-plugin.zip
 ```
 
 ###### *삭제 (필요시)*
 ```
-sudo bin/elasticsearch-plugin remove jaso-analyzer
+bin/elasticsearch-plugin remove jaso-analyzer
 ```
 
 ###### *인덱스 삭제 (필요시)*
