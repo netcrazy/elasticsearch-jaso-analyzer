@@ -5,8 +5,6 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.CharacterUtils;
 import org.apache.lucene.analysis.CharacterUtils.CharacterBuffer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
@@ -19,8 +17,6 @@ import java.io.*;
 public abstract class BaseTokenizer extends Tokenizer {
 
     private TokenizerOptions options;
-    private static Logger logger = null;
-
     private static JasoDecomposer decomposer;
 
     private int offset = 0, bufferIndex = 0, dataLen = 0, finalOffset = 0;
@@ -36,7 +32,6 @@ public abstract class BaseTokenizer extends Tokenizer {
     protected BaseTokenizer(TokenizerOptions options) {
         this.options = options;
 
-        logger = LoggerFactory.getLogger(options.getName());
         termAtt = addAttribute(CharTermAttribute.class);
         offsetAtt = addAttribute(OffsetAttribute.class);
 
@@ -154,7 +149,6 @@ public abstract class BaseTokenizer extends Tokenizer {
         } catch (Exception e) {
             StringWriter errors = new StringWriter();
             e.printStackTrace(new PrintWriter(errors));
-            logger.error(errors.toString());
         } finally {
         }
 
