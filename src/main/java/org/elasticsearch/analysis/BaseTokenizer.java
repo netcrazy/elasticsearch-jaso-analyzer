@@ -1,12 +1,12 @@
 package org.elasticsearch.analysis;
 
-import org.apache.logging.log4j.Logger;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.CharacterUtils;
 import org.apache.lucene.analysis.CharacterUtils.CharacterBuffer;
-import org.elasticsearch.common.logging.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
@@ -36,7 +36,7 @@ public abstract class BaseTokenizer extends Tokenizer {
     protected BaseTokenizer(TokenizerOptions options) {
         this.options = options;
 
-        logger = ESLoggerFactory.getLogger(options.getName());
+        logger = LoggerFactory.getLogger(options.getName());
         termAtt = addAttribute(CharTermAttribute.class);
         offsetAtt = addAttribute(OffsetAttribute.class);
 
