@@ -17,7 +17,7 @@ public class JasoTest extends TestCase {
         options.setChosung(true);
 
         JasoDecomposer aa = new JasoDecomposer();
-        String test = aa.runJasoDecompose("ㅇㄸㅅ", options);
+        String test = aa.runJasoDecompose("ㅆㄲ", options);
         System.out.println(test);
     }
 }
