@@ -62,7 +62,7 @@ public class JasoDecomposer {
                     int uniValue = ch - 0xAC00;
 
                     jong = uniValue % 28;                   //종성
-                    cho = ((uniValue - jong) / 28) / 21;   //초성
+                    cho = ((uniValue - jong) / 28) / 21;    //초성
                     jung = ((uniValue - jong) / 28) % 21;   //중성
 
                     //한글초성
@@ -142,7 +142,7 @@ public class JasoDecomposer {
                         int uniValue = ch - 0xAC00;
 
                         jong = uniValue % 28;                   //종성
-                        cho = ((uniValue - jong) / 28) / 21;   //초성
+                        cho = ((uniValue - jong) / 28) / 21;    //초성
                         jung = ((uniValue - jong) / 28) % 21;   //중성
 
                         etcBuffer.append(chosungKor[cho]);
@@ -189,6 +189,8 @@ public class JasoDecomposer {
                                 break;
                             case 'ㅄ':
                                 etcBuffer.append("ㅂㅅ");
+                            case 'ㄸ':
+                                etcBuffer.append("ㄷㄷ");
                                 break;
                             default:
                                 etcBuffer.append(ch);
