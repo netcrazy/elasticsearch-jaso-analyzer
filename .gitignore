@@ -2,3 +2,6 @@ build/
 .gradle/
 .idea/
 .git/
+gradle/
+gradlew
+gradlew.bat

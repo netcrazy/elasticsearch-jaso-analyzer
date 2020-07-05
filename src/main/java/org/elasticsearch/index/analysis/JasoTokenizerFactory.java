@@ -22,7 +22,7 @@ public class JasoTokenizerFactory extends AbstractTokenizerFactory {
                                 String name,
                                 Settings settings) {
 
-        super(indexSettings, name, settings);
+        super(indexSettings, settings, name);
 
         this.options = TokenizerOptions.create(name);
         this.options.setMistype(settings.getAsBoolean("mistype", TokenizerOptions.MISTYPE));
