@@ -16,17 +16,15 @@ import java.io.*;
  */
 public abstract class BaseTokenizer extends Tokenizer {
 
-    private TokenizerOptions options;
-    private static JasoDecomposer decomposer;
+    private final TokenizerOptions options;
 
     private int offset = 0, bufferIndex = 0, dataLen = 0, finalOffset = 0;
     private static final int MAX_WORD_LEN = 2048;
     private static final int IO_BUFFER_SIZE = 4096;
 
-    private CharTermAttribute termAtt;
-    private OffsetAttribute offsetAtt;
+    private final CharTermAttribute termAtt;
+    private final OffsetAttribute offsetAtt;
 
-    private static final CharacterUtils charUtils = null;
     private final CharacterBuffer ioBuffer = CharacterUtils.newCharacterBuffer(IO_BUFFER_SIZE);
 
     protected BaseTokenizer(TokenizerOptions options) {
@@ -66,7 +64,7 @@ public abstract class BaseTokenizer extends Tokenizer {
             if (bufferIndex >= dataLen) {
 
                 offset += dataLen;
-                boolean isDecompose = charUtils.fill(ioBuffer, jasoDecompose(input, this.options));
+                CharacterUtils.fill(ioBuffer, jasoDecompose(input, this.options));
 
                 //버퍼사이즈가 있으면 분석한다. (return false일때까지... 재귀호출)
                 if (ioBuffer.getLength() == 0) {
@@ -125,14 +123,10 @@ public abstract class BaseTokenizer extends Tokenizer {
 
     /**
      * Reader -> String -> 자소변환 -> String -> Reader
-     *
-     * @param in
-     * @param options
-     * @return
      */
     public static Reader jasoDecompose(Reader in, TokenizerOptions options) {
         Writer writer = new StringWriter();
-        decomposer = new JasoDecomposer();
+        JasoDecomposer decomposer = new JasoDecomposer();
         char[] buffer = new char[2048];
         String temp;
 
@@ -144,14 +138,11 @@ public abstract class BaseTokenizer extends Tokenizer {
             temp = writer.toString();
             temp = decomposer.runJasoDecompose(temp, options);
             // System.out.println(temp);
-            StringReader myStringReader = new StringReader(temp);
-            in = myStringReader;
+            in = new StringReader(temp);
         } catch (Exception e) {
             StringWriter errors = new StringWriter();
             e.printStackTrace(new PrintWriter(errors));
-        } finally {
         }
-
         return in;
     }
 

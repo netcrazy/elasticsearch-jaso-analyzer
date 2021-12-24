@@ -7,6 +7,5 @@ package org.elasticsearch.common;
  * @since 2016-02-03
  */
 public class config {
-    public static final char SPLIT_CHAR = '♥';
     public static final char WHITESPACE_CHAR = ' ';
 }

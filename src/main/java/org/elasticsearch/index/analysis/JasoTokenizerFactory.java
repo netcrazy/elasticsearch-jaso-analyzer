@@ -15,7 +15,7 @@ import org.elasticsearch.env.Environment;
  */
 public class JasoTokenizerFactory extends AbstractTokenizerFactory {
 
-    private TokenizerOptions options;
+    private final TokenizerOptions options;
 
     public JasoTokenizerFactory(IndexSettings indexSettings,
                                 Environment environment,

@@ -30,15 +30,8 @@ public final class JasoTokenizer extends BaseTokenizer {
 
     /**
      * White Space로 토큰분해
-     *
-     * @param c
-     * @return
      */
-    protected boolean isSplit(int c) {
-        if ((char) c == config.WHITESPACE_CHAR) {
-            return true;
-        } else {
-            return false;
-        }
+    private boolean isSplit(int c) {
+        return (char) c == config.WHITESPACE_CHAR;
     }
 }
