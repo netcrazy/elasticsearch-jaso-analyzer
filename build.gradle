@@ -1,9 +1,11 @@
 apply plugin: 'java'
 
-sourceCompatibility = JavaVersion.VERSION_11
-compileJava.options.encoding = 'UTF-8'
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
-version = '7.16.2'
+version = '8.3.2'
 jar {
     manifest {
         attributes 'Implementation-Title': 'Elasticsearch Jaso Analyzer Plugin',
@@ -27,18 +29,10 @@ test {
     systemProperties 'property': 'value'
 }
 
-uploadArchives {
-    repositories {
-       flatDir {
-           dirs 'repos'
-       }
-    }
-}
-
 task buildPluginZip(type: Zip, dependsOn:[':jar']) {
     baseName = 'jaso-analyzer-plugin'
     classifier = 'plugin'
-    from files(libsDir)
+    from 'build/libs'
     from 'src/main/resources'
 }
 

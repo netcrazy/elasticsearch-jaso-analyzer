@@ -29,12 +29,12 @@ public class JasoDecomposer {
             originStr = originStr.toLowerCase();
 
             char[] termBuffer = originStr.toCharArray();
-            StringBuffer korBuffer = new StringBuffer();
-            StringBuffer engBuffer = new StringBuffer();
-            StringBuffer chosungBuffer = new StringBuffer();
-            StringBuffer mistypingBuffer = new StringBuffer();
-            StringBuffer etcBuffer = new StringBuffer();
-            StringBuffer returnBuffer = new StringBuffer();
+            StringBuilder korBuffer = new StringBuilder();
+            StringBuilder engBuffer = new StringBuilder();
+            StringBuilder chosungBuffer = new StringBuilder();
+            StringBuilder mistypingBuffer = new StringBuilder();
+            StringBuilder etcBuffer = new StringBuilder();
+            StringBuilder returnBuffer = new StringBuilder();
 
             //첫글자가 한글일때만 초성분해
             boolean firstCharType = false;
@@ -53,9 +53,7 @@ public class JasoDecomposer {
             int cho;
             int jung;
             int jong;
-            for (int i = 0; i < termBuffer.length; i++) {
-                char ch = termBuffer[i];
-
+            for (char ch : termBuffer) {
                 //가(AC00)~힣(D7A3) 에 속한 글자면 분해
                 if (ch >= 0xAC00 && ch <= 0xD7A3 && !jaso) {
                     //Unicode 값으로 환산한다.
@@ -128,7 +126,7 @@ public class JasoDecomposer {
                             index = (int) ch - 65;
                             mistypingBuffer.append(mistyping[index]);
                         } else {
-                            if (hangul || english)
+                            if (english)
                                 mistypingBuffer.append(ch);
                         }
                     }
@@ -250,17 +248,17 @@ public class JasoDecomposer {
 
             //공백으로 분리된 문자열 (오타)
             if (mistypingBuffer.length() > 0) {
-                returnBuffer.append(mistypingBuffer.toString());
+                returnBuffer.append(mistypingBuffer);
                 returnBuffer.append(" ");
             }
 
             if (chosungBuffer.length() > 0) {
-                returnBuffer.append(chosungBuffer.toString());
+                returnBuffer.append(chosungBuffer);
                 returnBuffer.append(" ");
             }
 
             if (etcBuffer.length() > 0) {
-                returnBuffer.append(etcBuffer.toString());
+                returnBuffer.append(etcBuffer);
                 returnBuffer.append(" ");
             }
 
@@ -272,9 +270,6 @@ public class JasoDecomposer {
 
     /**
      * 문자열에 한글포함 여부
-     *
-     * @param str
-     * @return
      */
     private boolean isHangul(String str) {
         return str.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*");
@@ -282,9 +277,6 @@ public class JasoDecomposer {
 
     /**
      * 문자열에 영문포함 여부
-     *
-     * @param str
-     * @return
      */
     private boolean isEnglish(String str) {
         return str.matches(".*[a-zA-Z]+.*");
@@ -292,9 +284,6 @@ public class JasoDecomposer {
 
     /**
      * 문자열에 초성,중성 포함 여부
-     *
-     * @param str
-     * @return
      */
     private boolean isJaso(String str) {
         return str.matches(".*[ㄱ-ㅎㅏ-ㅣ]+.*");

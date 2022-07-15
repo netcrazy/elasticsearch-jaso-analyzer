@@ -8,8 +8,8 @@ package org.elasticsearch.analysis;
  */
 public class TestCaseVO {
 
-    private String origin;
-    private String compare;
+    private final String origin;
+    private final String compare;
 
     public TestCaseVO(String origin, String compare) {
         this.origin = origin;

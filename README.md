@@ -6,11 +6,11 @@
 $ sh gradlew clean build buildPluginZip
 ~~~
 
-###### 자동완성용 한글 자소분석기입니다. elasticsearch 7.16.2 에서 테스트 되었습니다
+###### 자동완성용 한글 자소분석기입니다. elasticsearch 8.3.2 에서 테스트 되었습니다
 
 ###### *설치*
 ```
-bin/elasticsearch-plugin install https://github.com/netcrazy/elasticsearch-jaso-analyzer/releases/download/v7.16.2/jaso-analyzer-plugin-7.16.2-plugin.zip
+bin/elasticsearch-plugin install https://github.com/netcrazy/elasticsearch-jaso-analyzer/releases/download/v8.3.2/jaso-analyzer-plugin-8.3.2-plugin.zip
 ```
 
 ###### *삭제 (필요시)*
@@ -25,7 +25,7 @@ curl -XDELETE 'http://localhost:9200/jaso'
 
 ###### *Korean Jaso Analyer 설정 및 인덱스 생성 (기본 자소검색용)*
 ```
-curl -XPUT -H 'Content-Type: application/json' localhost:9200/jaso/ -d '{
+curl -XPUT -H 'Content-Type: application/json' localhost:9200/jaso -d '{
   "settings": {
     "index": {
       "analysis": {
@@ -101,7 +101,7 @@ curl -XPUT -H 'Content-Type: application/json' http://localhost:9200/jaso/ -d '{
 
 ###### *인덱스 맵핑*
 ```
-curl -XPUT -H 'Content-Type: application/json' http://localhost:9200/jaso/_mapping/test -d '{
+curl -XPUT -H 'Content-Type: application/json' http://localhost:9200/jaso/_mapping -d '{
   "properties": {
     "name": {
       "type": "text",
@@ -134,24 +134,24 @@ curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/jaso/_anal
 
 ###### *문서생성*
 ```
-curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/jaso/test?pretty=true -d '{
+curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/jaso/_doc?pretty=true -d '{
     "name":"최일규 Hello"
 }'
 
-curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/jaso/test?pretty=true -d '{
+curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/jaso/_doc?pretty=true -d '{
     "name":"초아"
 }'
 ```
 
 ###### *문서검색*
 ```
-curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/jaso/test/_search?pretty=true -d '{
+curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/jaso/_search?pretty=true -d '{
     "query" : {
         "match" : { "name" : "초" }
     }
 }'
 
-curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/jaso/test/_search?pretty=true -d '{
+curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/jaso/_search?pretty=true -d '{
     "query" : {
         "match" : { "name" : "ㅊㅇㄱ" }
     }
