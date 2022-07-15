@@ -1,4 +1,5 @@
-# Korean Jaso Analyzer for Elasticsearch 8.3.2 (자동완성 플러그인)
+# Korean Jaso Analyzer for Elasticsearch 8.3.2 
+  (자동완성 플러그인)
 
 ## Build & Packaging
 
