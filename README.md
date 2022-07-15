@@ -1,4 +1,4 @@
-# Korean Jaso Analyzer for Elasticsearch 7.16.2
+# Korean Jaso Analyzer for Elasticsearch 8.3.2
 
 ## Build & Packaging
 
