@@ -2,7 +2,7 @@ package org.elasticsearch.index.analysis;
 
 import org.apache.lucene.analysis.Tokenizer;
 import org.elasticsearch.analysis.JasoTokenizer;
-import org.elasticsearch.analysis.TokenizerOptions;
+import org.elasticsearch.analysis.SettingOptions;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.index.IndexSettings;
 import org.elasticsearch.env.Environment;
@@ -15,7 +15,7 @@ import org.elasticsearch.env.Environment;
  */
 public class JasoTokenizerFactory extends AbstractTokenizerFactory {
 
-    private final TokenizerOptions options;
+    private final SettingOptions options;
 
     public JasoTokenizerFactory(IndexSettings indexSettings,
                                 Environment environment,
@@ -24,9 +24,9 @@ public class JasoTokenizerFactory extends AbstractTokenizerFactory {
 
         super(indexSettings, settings, name);
 
-        this.options = TokenizerOptions.create(name);
-        this.options.setMistype(settings.getAsBoolean("mistype", TokenizerOptions.MISTYPE));
-        this.options.setChosung(settings.getAsBoolean("chosung", TokenizerOptions.CHOSUNG));
+        this.options = SettingOptions.create(name);
+        this.options.setMistype(settings.getAsBoolean("mistype", SettingOptions.MISTYPE));
+        this.options.setChosung(settings.getAsBoolean("chosung", SettingOptions.CHOSUNG));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.elasticsearch.plugin.analysis;
 
+import org.elasticsearch.index.analysis.JasoTockenFilterFactory;
 import org.elasticsearch.index.analysis.JasoTokenizerFactory;
 import org.elasticsearch.index.analysis.*;
 import org.elasticsearch.plugins.AnalysisPlugin;
@@ -24,6 +25,11 @@ public class JasoAnalysisPlugin extends Plugin implements AnalysisPlugin {
     @Override
     public Map<String, AnalysisModule.AnalysisProvider<TokenizerFactory>> getTokenizers() {
         return singletonMap("jaso_tokenizer", JasoTokenizerFactory::new);
+    }
+
+    @Override
+    public Map<String, AnalysisModule.AnalysisProvider<TokenFilterFactory>> getTokenFilters() {
+        return singletonMap("jaso_filter", JasoTockenFilterFactory::new);
     }
 
     @Override

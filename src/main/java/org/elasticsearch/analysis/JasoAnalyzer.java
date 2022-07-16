@@ -14,6 +14,6 @@ public class JasoAnalyzer extends Analyzer {
 
     @Override
     protected Analyzer.TokenStreamComponents createComponents(final String fieldName) {
-        return new Analyzer.TokenStreamComponents(new JasoTokenizer(TokenizerOptions.create("jaso_analyzer")));
+        return new Analyzer.TokenStreamComponents(new JasoTokenizer(SettingOptions.create("jaso_analyzer")));
     }
 }

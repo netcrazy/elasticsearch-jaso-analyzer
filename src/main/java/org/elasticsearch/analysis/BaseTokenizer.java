@@ -16,7 +16,7 @@ import java.io.*;
  */
 public abstract class BaseTokenizer extends Tokenizer {
 
-    private final TokenizerOptions options;
+    private final SettingOptions options;
 
     private int offset = 0, bufferIndex = 0, dataLen = 0, finalOffset = 0;
     private static final int MAX_WORD_LEN = 2048;
@@ -27,7 +27,7 @@ public abstract class BaseTokenizer extends Tokenizer {
 
     private final CharacterBuffer ioBuffer = CharacterUtils.newCharacterBuffer(IO_BUFFER_SIZE);
 
-    protected BaseTokenizer(TokenizerOptions options) {
+    protected BaseTokenizer(SettingOptions options) {
         this.options = options;
 
         termAtt = addAttribute(CharTermAttribute.class);
@@ -124,7 +124,7 @@ public abstract class BaseTokenizer extends Tokenizer {
     /**
      * Reader -> String -> 자소변환 -> String -> Reader
      */
-    public static Reader jasoDecompose(Reader in, TokenizerOptions options) {
+    public static Reader jasoDecompose(Reader in, SettingOptions options) {
         Writer writer = new StringWriter();
         JasoDecomposer decomposer = new JasoDecomposer();
         char[] buffer = new char[2048];

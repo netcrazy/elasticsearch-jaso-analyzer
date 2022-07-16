@@ -15,7 +15,7 @@ public final class JasoTokenizer extends BaseTokenizer {
      *
      * @param options 토크나이저 옵션
      */
-    public JasoTokenizer(TokenizerOptions options) {
+    public JasoTokenizer(SettingOptions options) {
         super(options);
     }
 

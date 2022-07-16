@@ -21,7 +21,7 @@ public class JasoDecomposer {
 
     static String[] mistyping = {"ㅁ", "ㅠ", "ㅊ", "ㅇ", "ㄷ", "ㄹ", "ㅎ", "ㅗ", "ㅑ", "ㅓ", "ㅏ", "ㅣ", "ㅡ", "ㅜ", "ㅐ", "ㅔ", "ㅂ", "ㄱ", "ㄴ", "ㅅ", "ㅕ", "ㅍ", "ㅈ", "ㅌ", "ㅛ", "ㅋ"};
 
-    public String runJasoDecompose(String originStr, TokenizerOptions options) {
+    public String runJasoDecompose(String originStr, SettingOptions options) {
 
         if (!originStr.isEmpty()) {
 
@@ -234,7 +234,7 @@ public class JasoDecomposer {
 
             //공백으로 분리된 문자열 (영문)
             if (engBuffer.length() > 0) {
-                returnBuffer.append(engBuffer.toString());
+                returnBuffer.append(engBuffer);
                 returnBuffer.append(" ");
             }
 
@@ -287,5 +287,26 @@ public class JasoDecomposer {
      */
     private boolean isJaso(String str) {
         return str.matches(".*[ㄱ-ㅎㅏ-ㅣ]+.*");
+    }
+
+    public CharSequenceOffset split(char[] tokens, int tokenLength, SettingOptions options) {
+        if (tokens != null && tokens.length > 0) {
+            StringBuilder terms = new StringBuilder(tokenLength * 4);
+            int codePoint;
+            int charLength = 0;
+
+            for (int i = 0; i < tokenLength; i++) {
+                codePoint = Character.codePointAt(tokens, i);
+                charLength += Character.charCount(codePoint);
+                if (!Character.isWhitespace(tokens[i])) {
+                    terms.append(tokens[i]);
+                }
+            }
+
+            String convertTerms = this.runJasoDecompose(terms.toString(), options);
+            return new CharSequenceOffset(convertTerms, charLength);
+        }
+
+        return new CharSequenceOffset("", 0);
     }
 }

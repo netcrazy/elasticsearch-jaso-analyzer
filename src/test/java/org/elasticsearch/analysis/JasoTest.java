@@ -11,7 +11,7 @@ import junit.framework.TestCase;
 public class JasoTest extends TestCase {
 
     public void testJasoDecomposer() {
-        TokenizerOptions options = TokenizerOptions.create("testJasoDecomposer");
+        SettingOptions options = SettingOptions.create("testJasoDecomposer");
         options.setMistype(true);
         options.setChosung(true);
 

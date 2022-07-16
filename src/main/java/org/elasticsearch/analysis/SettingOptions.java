@@ -1,12 +1,6 @@
 package org.elasticsearch.analysis;
 
-/**
- * 토크나이저 옵션
- *
- * @author 최일규
- * @since 2016-02-12
- */
-public class TokenizerOptions {
+public class SettingOptions {
 
     //한영오타에 대한 토큰 추출여부 (hello -> ㅗㄷㅣㅣㅐ, 최일규 -> chldlfrb)
     public final static boolean MISTYPE = false;
@@ -19,11 +13,11 @@ public class TokenizerOptions {
 
     private String name = null;
 
-    public static TokenizerOptions create(String name) {
-        return new TokenizerOptions(name);
+    public static SettingOptions create(String name) {
+        return new SettingOptions(name);
     }
 
-    private TokenizerOptions(String name) {
+    private SettingOptions(String name) {
         this.name = name;
     }
 
