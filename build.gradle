@@ -1,15 +1,18 @@
 apply plugin: 'java'
 
+def pluginDescriptorProperties = new Properties()
+file("src/main/resources/plugin-descriptor.properties").withInputStream { pluginDescriptorProperties.load(it) }
+def elasticsearchVersion = pluginDescriptorProperties.getProperty("elasticsearch.version")
+
 compileJava {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-version = '8.3.2'
 jar {
     manifest {
         attributes 'Implementation-Title': 'Elasticsearch Jaso Analyzer Plugin',
-                   'Implementation-Version': version
+                   'Implementation-Version': elasticsearchVersion
     }
 }
 
@@ -18,15 +21,16 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.elasticsearch', name: 'elasticsearch', version: version
+    implementation group: 'org.elasticsearch', name: 'elasticsearch', version: "${elasticsearchVersion}"
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.1'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.32'
-    testImplementation group: 'junit', name: 'junit', version: '4.+'
+
+    testImplementation group: 'org.elasticsearch.test', name: 'framework', version: "${elasticsearchVersion}"
 }
 
 test {
-    systemProperties 'property': 'value'
+    systemProperty 'tests.security.manager', 'false'
 }
 
 task buildPluginZip(type: Zip, dependsOn:[':jar']) {

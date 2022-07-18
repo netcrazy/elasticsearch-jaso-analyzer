@@ -17,7 +17,7 @@ public class SettingOptions {
         return new SettingOptions(name);
     }
 
-    private SettingOptions(String name) {
+    protected SettingOptions(String name) {
         this.name = name;
     }
 
