@@ -187,6 +187,7 @@ public class JasoDecomposer {
                                 break;
                             case 'ㅄ':
                                 etcBuffer.append("ㅂㅅ");
+                                break;
                             case 'ㄸ':
                                 etcBuffer.append("ㄷㄷ");
                                 break;
