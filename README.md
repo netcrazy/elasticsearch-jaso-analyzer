@@ -3,6 +3,7 @@
 
 ## Build & Packaging
 
+###### 터미널 환경에서 자바 버전은 17로 변경해야합니다.
 ~~~shell
 $ sh gradlew clean build buildPluginZip
 ~~~
