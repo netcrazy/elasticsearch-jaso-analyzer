@@ -5,7 +5,7 @@ compileJava {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-version = '8.3.2'
+version = '8.6.2'
 jar {
     manifest {
         attributes 'Implementation-Title': 'Elasticsearch Jaso Analyzer Plugin',
@@ -34,6 +34,11 @@ task buildPluginZip(type: Zip, dependsOn:[':jar']) {
     classifier = 'plugin'
     from 'build/libs'
     from 'src/main/resources'
+
+    copy {
+        from "build/distributions"
+        into "docker"
+    }
 }
 
 artifacts {
