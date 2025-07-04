@@ -1,6 +1,10 @@
 # Korean Jaso Analyzer for Elasticsearch 9.0.3 
   (자동완성 플러그인)
 
+> 🔗 **Original Project**: [netcrazy/elasticsearch-jaso-analyzer](https://github.com/netcrazy/elasticsearch-jaso-analyzer)  
+> 📝 **Original Author**: Choi ilkyu (최일규)  
+> 🔄 **This Fork**: Updated for Elasticsearch 9.0.3 compatibility with Java 21+ support
+
 ## Build & Packaging
 
 ###### 터미널 환경에서 자바 버전은 21 이상이어야 합니다 (Java 23에서도 호환).
@@ -183,6 +187,36 @@ curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/jaso/_sear
 }'
 ```
 
+## 테스트
+
+### 단위 테스트 실행
+
+```bash
+# 모든 테스트 실행
+./gradlew test
+
+# 특정 테스트 클래스 실행
+./gradlew test --tests "org.elasticsearch.analysis.JasoTest"
+./gradlew test --tests "org.elasticsearch.analysis.JasoTokenizerTest"
+
+# 테스트 리포트 확인
+open build/reports/tests/test/index.html
+```
+
+### 테스트 커버리지
+
+현재 다음 기능들이 테스트됩니다:
+- ✅ 자소 분해 기능 (`JasoTest`)
+- ✅ 토크나이저 기능 (`JasoTokenizerTest`)
+- ✅ 한영 오타 처리
+- ✅ 초성 검색 토큰 생성
+- ✅ 공백 및 특수문자 처리
+
+### 자동화된 테스트
+
+- **CI/CD**: 푸시/PR 시 자동 테스트 실행 (Java 21, 23)
+- **릴리스**: 릴리스 전 자동 테스트 검증
+- **커버리지**: 테스트 결과 리포트 자동 생성
 ## 개발자를 위한 배포 가이드
 
 ### 1. GitHub에 코드 푸시 및 릴리스 생성
@@ -237,3 +271,22 @@ sudo systemctl restart elasticsearch
 ```
 
 ## 사용법
+
+## 라이센스 및 크레딧
+
+이 프로젝트는 [MIT 라이센스](LICENSE) 하에 배포됩니다.
+
+### 원본 프로젝트
+- **저장소**: [netcrazy/elasticsearch-jaso-analyzer](https://github.com/netcrazy/elasticsearch-jaso-analyzer)
+- **원 저작자**: Choi ilkyu (최일규)
+- **최초 버전**: Elasticsearch 8.6.2 지원
+
+### 이 Fork의 기여사항
+- Elasticsearch 9.0.3 호환성 업데이트
+- Java 21+ 지원 (Java 23에서 테스트됨)
+- GitHub Actions CI/CD 추가
+- 자동화된 릴리스 프로세스
+- 향상된 테스트 커버리지
+
+### 기여하기
+원본 프로젝트와 이 Fork 모두에 기여를 환영합니다. Pull Request를 보내주세요!
