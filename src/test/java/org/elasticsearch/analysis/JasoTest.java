@@ -17,7 +17,7 @@ public class JasoTest extends TestCase {
 
         JasoDecomposer aa = new JasoDecomposer();
 
-        String expected = "ㅅㅅㄱㄱ_FAIL_TEST"; // 일부러 실패하도록 수정
+        String expected = "ㅅㅅㄱㄱ";
         String actual = aa.runJasoDecompose("ㅆㄲ", options);
         assertEquals(expected, actual);
     }

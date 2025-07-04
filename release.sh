@@ -104,3 +104,20 @@ echo ""
 echo "🎉 릴리스 준비 완료!"
 echo "📁 플러그인 파일: $PLUGIN_FILE"
 echo "📏 파일 크기: $(du -h "$PLUGIN_FILE" | cut -f1)"
+
+# 릴리스 요약 표시
+echo ""
+echo "📋 릴리스 요약:"
+echo "   🏷️  버전: v${VERSION}"
+echo "   🧪 테스트: ${TOTAL_TESTS:-0}개 모두 통과"
+echo "   📦 플러그인: $(basename "$PLUGIN_FILE")"
+echo "   🎯 대상: Elasticsearch ${VERSION}"
+echo "   ☕ Java: 21+ 호환"
+
+# 다음 단계 안내
+echo ""
+echo "🚀 다음 단계:"
+echo "   1. GitHub에 푸시: git push origin main"
+echo "   2. 태그 푸시: git push origin v${VERSION}"
+echo "   3. GitHub Releases에서 릴리스 생성"
+echo "   4. 플러그인 설치: elasticsearch-plugin install https://github.com/USERNAME/elasticsearch-jaso-analyzer/releases/download/v${VERSION}/$(basename "$PLUGIN_FILE")"
