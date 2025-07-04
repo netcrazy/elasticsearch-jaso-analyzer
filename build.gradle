@@ -1,11 +1,11 @@
 apply plugin: 'java'
 
 compileJava {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
-version = '8.6.2'
+version = '9.0.3'
 jar {
     manifest {
         attributes 'Implementation-Title': 'Elasticsearch Jaso Analyzer Plugin',
@@ -19,9 +19,9 @@ repositories {
 
 dependencies {
     implementation group: 'org.elasticsearch', name: 'elasticsearch', version: version
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.1'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.32'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.23.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.23.1'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.9'
     testImplementation group: 'junit', name: 'junit', version: '4.+'
 }
 
@@ -30,8 +30,8 @@ test {
 }
 
 task buildPluginZip(type: Zip, dependsOn:[':jar']) {
-    baseName = 'jaso-analyzer-plugin'
-    classifier = 'plugin'
+    archiveBaseName = 'jaso-analyzer-plugin'
+    archiveClassifier = 'plugin'
     from 'build/libs'
     from 'src/main/resources'
 

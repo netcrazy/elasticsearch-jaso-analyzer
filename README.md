@@ -1,16 +1,30 @@
-# Korean Jaso Analyzer for Elasticsearch 8.6.2 
+# Korean Jaso Analyzer for Elasticsearch 9.0.3 
   (자동완성 플러그인)
 
 ## Build & Packaging
 
-###### 터미널 환경에서 자바 버전은 17로 변경해야합니다.
+###### 터미널 환경에서 자바 버전은 21 이상이어야 합니다 (Java 23에서도 호환).
 ~~~shell
-$ sh gradlew clean build buildPluginZip
+$ ./gradlew clean build buildPluginZip
 ~~~
 
-###### 자동완성용 한글 자소분석기입니다. elasticsearch 8.6.2 에서 테스트 되었습니다
+###### 자동완성용 한글 자소분석기입니다. elasticsearch 9.0.3 에서 테스트 되었습니다
 
-## 도커 컨데이이너에서 elasticsearch, kibana 설치/실행
+## 설치 방법
+
+### 1. 직접 설치 (로컬 파일)
+```bash
+# 플러그인 ZIP 파일을 다운로드 후
+/usr/share/elasticsearch/bin/elasticsearch-plugin install file:///path/to/jaso-analyzer-plugin-9.0.3-plugin.zip
+```
+
+### 2. GitHub Releases에서 설치
+```bash
+# GitHub Releases에서 직접 설치 (릴리스 후 사용 가능)
+/usr/share/elasticsearch/bin/elasticsearch-plugin install https://github.com/YOUR_USERNAME/elasticsearch-jaso-analyzer/releases/download/v9.0.3/jaso-analyzer-plugin-9.0.3-plugin.zip
+```
+
+## 도커 컨테이너에서 elasticsearch, kibana 설치/실행
 ```
 #플러그인이 자동으로 설치된다.
 cd docker
@@ -168,3 +182,58 @@ curl -XPOST -H 'Content-Type: application/json' http://localhost:9200/jaso/_sear
     }
 }'
 ```
+
+## 개발자를 위한 배포 가이드
+
+### 1. GitHub에 코드 푸시 및 릴리스 생성
+
+```bash
+# 코드 커밋 및 푸시
+git add .
+git commit -m "Update to Elasticsearch 9.0.3"
+git push origin main
+
+# 태그 생성 및 푸시 (자동 릴리스 트리거)
+git tag v9.0.3
+git push origin v9.0.3
+```
+
+### 2. 수동 릴리스 생성 (GitHub Actions 없는 경우)
+
+1. GitHub 저장소에서 "Releases" 페이지로 이동
+2. "Create a new release" 클릭
+3. 태그: `v9.0.3`, 제목: `Elasticsearch 9.0.3 지원`
+4. `build/distributions/jaso-analyzer-plugin-9.0.3-plugin.zip` 파일 업로드
+5. "Publish release" 클릭
+
+### 3. 사용자 설치 방법
+
+```bash
+# GitHub Releases에서 설치
+/usr/share/elasticsearch/bin/elasticsearch-plugin install https://github.com/YOUR_USERNAME/elasticsearch-jaso-analyzer/releases/download/v9.0.3/jaso-analyzer-plugin-9.0.3-plugin.zip
+
+# 설치 확인
+/usr/share/elasticsearch/bin/elasticsearch-plugin list
+
+# Elasticsearch 재시작 필요
+sudo systemctl restart elasticsearch
+```
+
+### 4. Docker 환경에서 사용
+
+```bash
+cd docker
+docker-compose up -d
+
+# 플러그인 설치 확인
+curl -X GET "localhost:9200/_nodes/plugins?pretty"
+```
+
+### 5. 플러그인 제거 (필요시)
+
+```bash
+/usr/share/elasticsearch/bin/elasticsearch-plugin remove jaso-analyzer
+sudo systemctl restart elasticsearch
+```
+
+## 사용법
