@@ -32,16 +32,46 @@ else
     echo "✅ 커밋할 변경사항 없음"
 fi
 
-# 1. 빌드
+# 1. 테스트 실행
+echo "🧪 단위 테스트 실행 중..."
+./gradlew clean test
+
+if [ $? -ne 0 ]; then
+    echo "❌ 테스트 실패! 릴리스를 중단합니다."
+    echo "💡 테스트 리포트: build/reports/tests/test/index.html"
+    exit 1
+fi
+
+# 테스트 결과 요약 표시
+TEST_REPORT_XML="build/test-results/test"
+if [ -d "$TEST_REPORT_XML" ]; then
+    TOTAL_TESTS=$(find "$TEST_REPORT_XML" -name "TEST-*.xml" -exec grep -h "tests=" {} \; | sed 's/.*tests="\([0-9]*\)".*/\1/' | awk '{sum+=$1} END {print sum}')
+    FAILED_TESTS=$(find "$TEST_REPORT_XML" -name "TEST-*.xml" -exec grep -h "failures=" {} \; | sed 's/.*failures="\([0-9]*\)".*/\1/' | awk '{sum+=$1} END {print sum}')
+    ERROR_TESTS=$(find "$TEST_REPORT_XML" -name "TEST-*.xml" -exec grep -h "errors=" {} \; | sed 's/.*errors="\([0-9]*\)".*/\1/' | awk '{sum+=$1} END {print sum}')
+    
+    echo "✅ 테스트 완료!"
+    echo "   📊 총 테스트: ${TOTAL_TESTS:-0}개"
+    echo "   ✅ 성공: $((${TOTAL_TESTS:-0} - ${FAILED_TESTS:-0} - ${ERROR_TESTS:-0}))개"
+    echo "   ❌ 실패: ${FAILED_TESTS:-0}개"
+    echo "   🚫 에러: ${ERROR_TESTS:-0}개"
+    
+    if [ "${FAILED_TESTS:-0}" -gt 0 ] || [ "${ERROR_TESTS:-0}" -gt 0 ]; then
+        echo "❌ 테스트에 실패하거나 에러가 있습니다!"
+        echo "💡 상세 리포트: build/reports/tests/test/index.html"
+        exit 1
+    fi
+fi
+
+# 2. 빌드
 echo "📦 플러그인 빌드 중..."
-./gradlew clean build buildPluginZip
+./gradlew buildPluginZip
 
 if [ $? -ne 0 ]; then
     echo "❌ 빌드 실패!"
     exit 1
 fi
 
-# 2. 빌드 파일 확인
+# 3. 빌드 파일 확인
 PLUGIN_FILE="build/distributions/${PLUGIN_NAME}-${VERSION}-plugin.zip"
 if [ ! -f "$PLUGIN_FILE" ]; then
     echo "❌ 플러그인 파일을 찾을 수 없습니다: $PLUGIN_FILE"
@@ -50,7 +80,7 @@ fi
 
 echo "✅ 플러그인 빌드 완료: $PLUGIN_FILE"
 
-# 3. Git 태그 생성
+# 4. Git 태그 생성
 echo "🏷️  Git 태그 생성 중..."
 git tag -a "v${VERSION}" -m "Release version ${VERSION}"
 
