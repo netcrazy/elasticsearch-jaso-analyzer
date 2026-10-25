@@ -22,7 +22,7 @@ import org.apache.lucene.analysis.Analyzer;
 public class JasoAnalysisPlugin extends Plugin implements AnalysisPlugin {
 
     @Override
-    public Map<String, AnalysisModule.AnalysisProvider<TokenizerFactory>> getTokenizers() {
+    public Map<String, AnalysisModule.AnalysisProvider<org.elasticsearch.index.analysis.TokenizerFactory>> getTokenizers() {
         return singletonMap("jaso_tokenizer", JasoTokenizerFactory::new);
     }
 

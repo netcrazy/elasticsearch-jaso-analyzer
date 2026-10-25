@@ -1,5 +1,47 @@
+# Gradle
 build/
-.idea/
-.git/
 .gradle/
+gradlew
+gradlew.bat
+gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.tmp
+*.temp
+
+# Elasticsearch
+data/
+logs/
+
+# Docker
+docker/*.zip
+docker/jaso-analyzer-plugin-*.zip
+
+# Other
+bin/
+out/
+target/
+*.swp
+*.swo
+*~
